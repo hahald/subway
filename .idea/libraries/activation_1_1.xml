@@ -1,0 +1,14 @@
+<component name="libraryTable">
+  <library name="activation-1.1">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/web/WEB-INF/lib/activation-1.1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/web/WEB-INF/lib/hamcrest-core-1.4-atlassian-1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/web/WEB-INF/lib/javaee-api-7.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/web/WEB-INF/lib/javax.mail-1.5.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/web/WEB-INF/lib/javax.servlet.jsp.jstl.jar!/" />
+      <root url="jar://$PROJECT_DIR$/web/WEB-INF/lib/jstl-impl.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

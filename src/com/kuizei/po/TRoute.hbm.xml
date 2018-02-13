@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+    <class name="com.kuizei.po.TRoute" table="t_route">
+        <id name="routeId">
+            <column name="route_id" sql-type="varchar(3)" length="3"/>
+        </id>
+        <property name="routeName">
+            <column name="route_name" sql-type="varchar(50)" length="50" />
+        </property>
+        <property name="status">
+            <column name="status" sql-type="varchar(1)" length="1" />
+        </property>
+    </class>
+</hibernate-mapping>

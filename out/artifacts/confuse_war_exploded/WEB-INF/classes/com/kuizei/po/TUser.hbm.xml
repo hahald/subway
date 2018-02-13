@@ -1,0 +1,33 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+    <class name="com.kuizei.po.TUser" table="t_user" >
+        <id name="uid">
+            <column name="uid" sql-type="varchar(3)" length="3"/>
+        </id>
+        <property name="uname">
+            <column name="uname" sql-type="varchar(20)" length="20" />
+        </property>
+        <property name="gender">
+            <column name="gender" sql-type="varchar(1)" length="1" />
+        </property>
+        <property name="workingAge">
+            <column name="working_age" sql-type="int(11)" />
+        </property>
+        <property name="role">
+            <column name="role" sql-type="varchar(1)" length="1" />
+        </property>
+        <property name="photo">
+            <column name="photo" sql-type="varchar(100)" length="100" />
+        </property>
+        <property name="pwd">
+            <column name="pwd" sql-type="varchar(10)" length="10"/>
+        </property>
+        <property name="dept">
+            <column name="dept" sql-type="varchar(5)" length="5" />
+        </property>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+
+    <!--获取数据库配置文件-->
+    <context:property-placeholder location="classpath:config/db.properties"/>
+
+    <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource" destroy-method="close">
+        <property name="driverClass" value="${jdbc.driver_class}" />
+        <property name="jdbcUrl" value="${jdbc.connection.url}?useUnicode=true&amp;characterEncoding=UTF-8" />
+        <property name="user" value="${jdbc.connection.username}" />
+        <property name="password" value="${jdbc.connection.password}" />
+        <property name="minPoolSize" value="1" />
+        <property name="maxPoolSize" value="5" />
+        <property name="initialPoolSize" value="1" />
+        <property name="maxIdleTime" value="60" />
+        <property name="acquireIncrement" value="2" />
+        <property name="acquireRetryAttempts" value="30" />
+        <property name="maxStatements" value="100" />
+    </bean>
+
+    <bean id="sessionFactory" class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">
+        <property name="dataSource" ref="dataSource" />
+        <property name="hibernateProperties">
+            <props>
+                <prop key="hibernate.dialect">com.kuizei.dao.RegMySQLDialect</prop>
+                <prop key="hibernate.current_session_context_class">org.springframework.orm.hibernate5.SpringSessionContext</prop>
+                <prop key="jdbc.use_scrollable_resultset">false</prop>
+                <prop key="hibernate.hbm2ddl.auto">update</prop>
+                <prop key="hibernate.show_sql">true</prop>
+                <prop key="hibernate.format_sql">false</prop>
+                <prop key="hibernate.jdbc.batch_size">30</prop>
+            </props>
+        </property>
+        <property name="mappingLocations">
+            <list>
+                <value>classpath:com/kuizei/po/*.hbm.xml</value>
+            </list>
+        </property>
+    </bean>
+    <!-- 加载mongodb的属性配置文件 -->
+ <!--   <context:property-placeholder location="classpath:config/mongodb.properties" />-->
+
+ <!--   <import resource="classpath:/config/spring/mongodb-context.xml"/>-->
+
+</beans>

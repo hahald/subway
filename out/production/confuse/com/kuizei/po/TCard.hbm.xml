@@ -1,0 +1,36 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+    <class name="com.kuizei.po.TCard" table="t_card">
+        <id name="id">
+            <column name="id" sql-type="int(11)"/>
+        </id>
+        <property name="cardId">
+            <column name="card_id" sql-type="varchar(30)" length="30"/>
+        </property>
+        <property name="identity">
+            <column name="identity" sql-type="varchar(25)" length="25" />
+        </property>
+        <property name="tel">
+            <column name="tel" sql-type="varchar(20)" length="20" />
+        </property>
+        <property name="cname">
+            <column name="cname" sql-type="varchar(20)" length="20" />
+        </property>
+        <property name="initTime">
+            <column name="init_time" sql-type="timestamp" />
+        </property>
+        <property name="deposit">
+            <column name="deposit" sql-type="decimal(10)" precision="10" />
+        </property>
+        <property name="stored">
+            <column name="stored" sql-type="decimal(10)" precision="10" />
+        </property>
+        <property name="status">
+            <column name="status" sql-type="varchar(1)" length="1" />
+        </property>
+    </class>
+</hibernate-mapping>

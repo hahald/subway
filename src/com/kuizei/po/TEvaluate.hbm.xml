@@ -1,0 +1,24 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+    <class name="com.kuizei.po.TEvaluate" table="t_evaluate" >
+        <id name="id">
+            <column name="id" sql-type="int(11)"/>
+        </id>
+        <property name="uid">
+            <column name="uid" sql-type="varchar(3)" length="3"/>
+        </property>
+        <property name="evaluation">
+            <column name="evaluation" sql-type="varchar(100)" length="100" />
+        </property>
+        <property name="star">
+            <column name="star" sql-type="int(11)" />
+        </property>
+        <property name="optTime">
+            <column name="opt_time" sql-type="timestamp"/>
+        </property>
+    </class>
+</hibernate-mapping>
