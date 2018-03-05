@@ -8,6 +8,7 @@ import com.kuizei.service.CardService;
 import com.kuizei.service.LogService;
 import com.kuizei.service.ReplenishService;
 import com.kuizei.vo.CardInfoVO;
+import com.kuizei.vo.UserInfoVO;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -31,55 +32,32 @@ public class CardController {
     @RequestMapping("/card_add")
     @ResponseBody
     public Map<String,Object> addCard(HttpSession session,TCard card) throws Exception{
-        TUser user = (TUser) session.getAttribute("userinfo");
-        Map<String,Object> map = new HashMap<String,Object>();
-        if(user == null){
-            map.put("flag","login");
-            map.put("message","请登陆后再使用");
-            return map;
-        }
-
-        return cardService.addCard(user.getUid(),card);
+        UserInfoVO userInfoVO = (UserInfoVO) session.getAttribute("userinfo");
+        return cardService.addCard(userInfoVO.getUid(),card);
     }
 
     //卡挂失
     @RequestMapping("/card_loss")
     @ResponseBody
-    public Map<String,Object> lossCard(HttpSession session,String cid) throws Exception{
-        TUser user = (TUser) session.getAttribute("userinfo");
-        Map<String,Object> map = new HashMap<String,Object>();
-        if(user == null){
-            map.put("flag","login");
-            map.put("message","请登陆后再使用");
-            return map;
-        }
-
-        map = cardService.lossCard(cid,user.getUid());
-
-        return map;
+    public Map<String,Object> lossCard(HttpSession session,String cardId,String newid) throws Exception{
+        UserInfoVO userInfoVO = (UserInfoVO) session.getAttribute("userinfo");
+        return cardService.lossCard(cardId,userInfoVO.getUid(),newid);
     }
 
     //卡储值
     @RequestMapping("/card_money")
     @ResponseBody
     public Map<String,Object> depositCard(HttpSession session,TReplenish replenish) throws Exception{
-        TUser user = (TUser) session.getAttribute("userinfo");
-        Map<String,Object> map = new HashMap<String,Object>();
-        if(user == null){
-            map.put("flag","login");
-            map.put("message","请登陆后再使用");
-            return map;
-        }
-
-        return cardService.changeStore(user.getUid(),replenish);
+        UserInfoVO userInfoVO = (UserInfoVO) session.getAttribute("userinfo");
+        return cardService.changeStore(userInfoVO.getUid(),replenish);
     }
 
     //查询卡信息
     @RequestMapping("/card_find")
     @ResponseBody
-    public CardInfoVO queryCardInfo(String cid) throws Exception{
+    public CardInfoVO queryCardInfo(String cardId) throws Exception{
 
-        return cardService.queryCardInfo(cid);
+        return cardService.queryCardInfo(cardId);
     }
 
 }

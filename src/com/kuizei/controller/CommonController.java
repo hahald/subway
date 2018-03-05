@@ -10,12 +10,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class CommonController {
 
     @RequestMapping("/open")
-    public String openJsp(String page){
-        if(page==null||"".equals(page))
-            return "login2";
-        else
-            return page;
+    public String openJsp(){
+        return "login2";
+    }
 
+    @RequestMapping("/opt")
+    public String openJsp(String page){
+        return page;
     }
 
     @RequestMapping("/center")

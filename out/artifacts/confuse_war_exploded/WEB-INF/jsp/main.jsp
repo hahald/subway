@@ -17,22 +17,27 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>地铁</title>
     <link type="text/css" rel="stylesheet" href="/static/common/bootstrap/css/bootstrap.css">
-    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-    <script src="/static/common/js/html5shiv.js"></script>
-    <script src="/static/common/js/respond.js"></script>
-    <![endif]-->
-    <style>
-        body{
-            margin: 0;
-            padding: 50px 0 0 0;
-        }
-        .left{
-            background-color: #ddd;
-            padding: 10px 0 500px 0;
-        }
-    </style>
+    <link type="text/css" rel="stylesheet" href="/static/common/bootstrap/css/fileinput.min.css">
+
+    <script src="<%=basePath%>static/common/js/jquery-3.3.1.min.js"></script>
+    <script src="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="<%=basePath%>static/common/bootstrap/js/html5shiv.js"></script>
+    <script src="<%=basePath%>static/common/bootstrap/js/respond.js"></script>
+    <script src="<%=basePath%>static/common/bootstrap/js/fileinput.min.js"></script>
+    <script src="<%=basePath%>static/common/bootstrap/js/fileinput_locale_zh.js"></script>
+
+
+    <%--<![endif]-->--%>
+    <%--<style>--%>
+        <%--body{--%>
+            <%--margin: 0;--%>
+            <%--padding: 50px 0 0 0;--%>
+        <%--}--%>
+        <%--.left{--%>
+            <%--background-color: #ddd;--%>
+            <%--padding: 10px 0 500px 0;--%>
+        <%--}--%>
+    <%--</style>--%>
 
 
 </head>
@@ -86,7 +91,7 @@
 <!-- 顶部固定导航条结束 -->
 
 
-<!-- 内容 -->
+<%--<!-- 内容 -->--%>
 <div class="container-fluid">
     <div class="row">
         <!-- 左侧导航栏 -->
@@ -115,13 +120,13 @@
                 <h1>管理控制台</h1>
             </div>
             <button class="btn btn-default" id="evaluate">星级评价</button>
-            <button class="btn btn-primary" >操作2</button>
+            <button class="btn btn-primary" id="222">xxx</button>
             <button class="btn btn-success" >操作3</button>
             <button class="btn btn-info">操作4</button>
-            <button class="btn btn-warning">操作5</button>
+            <button class="btn btn-warning" id="dropdown_test">操作5</button>
             <button class="btn btn-danger" id="card_opt">卡操作</button>
-            <button class="btn btn-danger" id="card_wao">这</button>
-            <button class="btn btn-danger" id="card_loss">卡挂失</button>
+            <button class="btn btn-danger" id="sell">售票</button>
+            <button class="btn btn-danger" id="">what</button>
             <p><a data-toggle="modal" href="#card_add" class="btn btn-primary btn-large">发动演示模态框</a></p>
             </p>
 
@@ -155,8 +160,31 @@
             </div>
 
 
+            <form class="form-horizontal required-validate" action="<%=basePath%>wao/uploadHeadImg" enctype="multipart/form-data" method="post" >
 
+                <div class="form-group">
+                    <label for="" class="col-md-1 control-label">头像</label>
+                    <div class="col-md-10 tl th">
+                        <input type="file" name="pic" class="projectfile" value="${deal.image}" />
+                        <p class="help-block">支持jpg、jpeg、png、gif格式，大小不超过2.0M</p>
+                    </div>
+                </div>
+                <div class="form-group text-center ">
+                    <div class="col-md-10 col-md-offset-1">
+                        <button type="submit" class="btn btn-primary btn-lg" id="uploadpic">保存</button>
+                    </div>
+                </div>
+            </form>
 
+            <%--<div id="picture">--%>
+                <%--<form enctype="multipart/form-data" >--%>
+                    <%--<div class="form-group" >--%>
+                        <%--<label class="col-sm-2 control-label">图片:</label>--%>
+                        <%--<input type="file" name="pic" class="col-sm-10 file-loading" id="file-Portrait"  />--%>
+                        <%--<input type="hidden"  name="sellId"  id="sellId" value="" />--%>
+                    <%--</div>--%>
+                <%--</form>--%>
+            <%--</div>--%>
 
             <!-- 第二行 -->
             <div class="row">
@@ -209,70 +237,48 @@
                 <!-- 第四个面板结束 -->
             </div>
             <!-- 第二个行结束 -->
-            <div id="card_add" class="modal fade in" style="display: none; ">
-                <div class="modal-header">
-                    <a class="close" data-dismiss="modal">×</a>
-                    <h3>这是一个模态框标题</h3>
-                </div>
-                <div class="modal-body">
-                    <h4>模态框中的文本</h4>
-                    <p>你可以在这添加一些文本。</p>
-                </div>
-                <p class="message" id="message"></p>
-                <div class="modal-footer">
-                    <a href="#" class="btn btn-success">唤醒活动</a>
-                    <a href="#" class="btn" data-dismiss="modal">关闭</a>
-                </div>
-            </div>
 
         </div><!-- end of class="col-md-10" -->
     </div><!-- end of row after container -->
 </div><!-- end of second class="container-fluid" -->
-<div class="container">
-    <h2>使用Bootstrap创建模态框</h2>
-
-
-</div>
 
 <%--<script src="/static/common/js/jquery-1.9.0.min.js"></script>--%>
 <%--<script src="/static/common/js/bootstrap.js"></script>--%>
-<script src="http://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>
-<script src="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
 <script type="text/javascript">
+
     $(function() {
         $("#evaluate").click(function () {
 
-            window.location.href = "open?page=evalu"
+            window.location.href = "opt?page=evaluate"
 
         });
+
 
         $("#card_opt").click(function () {
 
-            window.location.href = "open?page=model"
+            window.location.href = "opt?page=model"
 
         });
 
-        $("#card_wao").click(function () {
+        $("#sell").click(function () {
 
-            $.ajax({
-                url: '<%=basePath%>wao/card_money',
-                type: 'post',
-                dataType: 'json',
-                data: {
-                    cardId: "111",
-                    money: 0
-                },success:function (data) {
-                    if(data.flag=='yeah'){
-                        alert("yeah!!!");
-                    }else{
-                        alert(data);
-                    }
-                }})
+            window.location.href = "opt?page=ticket_sell"
 
         });
 
+        $('input[class=projectfile]').fileinput({
+            showUpload : false,
+            showRemove : false,
+            language : 'zh',
+            allowedPreviewTypes: ['image'],
+            allowedFileTypes: ['image'],
+            allowedFileExtensions:  ['jpg', 'png'],
+            maxFileSize : 2000
+        });
 
     })
+
 </script>
 </body>
 </html> 

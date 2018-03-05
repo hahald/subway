@@ -24,4 +24,12 @@
 
     <!--静态资源的访问-->
     <mvc:resources mapping="/static/**" location="/static/" />
+
+    <mvc:interceptors>
+        <mvc:interceptor>
+            <!-- 拦截所有URL中包含/user/的请求 -->
+            <mvc:mapping path="/**"/>
+            <bean class="com.kuizei.util.LoginInterceptor"></bean>
+        </mvc:interceptor>
+    </mvc:interceptors>
 </beans>

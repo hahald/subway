@@ -4,6 +4,7 @@ import com.kuizei.dao.CardDAO;
 import com.kuizei.po.TCard;
 import com.kuizei.po.TLog;
 import com.kuizei.po.TReplenish;
+import com.kuizei.util.BeanUtil;
 import com.kuizei.vo.CardInfoVO;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
@@ -95,11 +96,13 @@ public class CardService extends Exception  {
             return map;
         }
 
-        card1.setStored(store);
+        card1.setStored(store.add(replenish.getMoney()));
         cardDAO.saveOrUpdate(card1);
 
         String now = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss").format(new Date());
         replenish.setOptTime(Timestamp.valueOf(now));
+        replenish.setOptType("1");
+        replenish.setOptLocation("001");
         List<TReplenish> tReplenishes = new ArrayList<TReplenish>();
         tReplenishes.add(replenish);
         replenishService.AddReplenish(tReplenishes);
@@ -107,7 +110,7 @@ public class CardService extends Exception  {
         //存储操作日志
         String now2 = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss").format(new Date());
         TLog log = new TLog();
-        log.setOptId(replenish.getCardId());
+        log.setOptId(String.valueOf(tReplenishes.get(0).getId()));
         log.setOptLocation("001");
         log.setOptType("4");
         log.setUid(uid);
@@ -121,27 +124,45 @@ public class CardService extends Exception  {
     /*
     * 挂失
     */
-    public Map<String,Object> lossCard(String cardid,String uid) throws Exception{
+    public Map<String,Object> lossCard(String cardid,String uid,String newid) throws Exception{
 
         Map<String,Object> map = new HashMap<String,Object>();
         map.put("flag","err");
+        TCard card_new = cardDAO.getCardInfo(newid);
+        if (card_new != null){
+            map.put("message","新卡号已占用，请确认后重试");
+            return map;
+        }
         TCard card1=cardDAO.getCardInfo(cardid);
         if (card1==null){
             map.put("message","卡号不存在");
             return map;
         }
 
+        //作废老卡
         card1.setStatus("2");
         cardDAO.saveOrUpdate(card1);
 
+        //生成新卡信息
+//        BeanUtils.copyProperties(card1,card_new,new String[]{"identity","tel","stroed","cname","deposit"});
+        card_new = new TCard();
+        card_new.setCardId(newid);
+        card_new.setTel(card1.getTel());
+        card_new.setIdentity(card1.getIdentity());
+        card_new.setStatus("1");
+        card_new.setStored(card1.getStored());
+        card_new.setCname(card1.getCname());
+        card_new.setDeposit(card1.getDeposit());
+        card_new.setInitTime(Timestamp.valueOf(new SimpleDateFormat("yyyy-MM-dd hh:mm:ss").format(new Date())));
+        cardDAO.save(card_new);
+
         //存储操作日志
-        String now = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss").format(new Date());
         TLog log = new TLog();
-        log.setOptId(cardid);
+        log.setOptId(String.valueOf(card1.getId()));
         log.setOptLocation("001");
         log.setOptType("4");
         log.setUid(uid);
-        log.setOptTime(Timestamp.valueOf(now));
+        log.setOptTime(Timestamp.valueOf(new SimpleDateFormat("yyyy-MM-dd hh:mm:ss").format(new Date())));
         logService.addLog(log);
 
         map.put("flag","yeah");
@@ -161,7 +182,7 @@ public class CardService extends Exception  {
                 BeanUtils.copyProperties(card,cardInfoVO);
                 cardInfoVO.setRemark("yeah");
             }else {
-                cardInfoVO.setRemark("此卡不可用");
+                cardInfoVO.setRemark("此卡已挂失，不可用，请确认后重试");
             }
 
         }else{

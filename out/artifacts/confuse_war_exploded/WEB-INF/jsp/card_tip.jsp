@@ -6,6 +6,16 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%
+    String path = request.getContextPath();
+    String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+    String uri=basePath.substring(0,basePath.length()-1)+request.getServletPath();
+    if(request.getPathInfo() != null){
+        uri += request.getPathInfo();
+    }
+    pageContext.setAttribute("uri", uri);
+    pageContext.setAttribute("basePath", basePath);
+%>
 <html>
 <head>
     <title>卡操作结果</title>
@@ -15,13 +25,15 @@
 </head>
 <body>
 <h3>操作成功</h3>
-<button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#card_add" id="goback">
+<button class="btn btn-primary btn-lg"  id="goback" >
     返回继续操作
 </button>
-<script>
+
+<script type="text/javascript">
     $(function(){
         $("#gobcak").click(function () {
-            window.location.href = "open?page=model"
+            alert("why???");
+            window.location.href = "opt?page=model"
         });
     })
 </script>

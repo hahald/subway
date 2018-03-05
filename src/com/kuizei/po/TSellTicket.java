@@ -11,6 +11,8 @@ public class TSellTicket {
     private Integer num;
     private Integer total;
     private Timestamp endTime;
+    private String status;
+    private String ticketId;
 
     public int getId() {
         return id;
@@ -68,6 +70,14 @@ public class TSellTicket {
         this.endTime = endTime;
     }
 
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -79,12 +89,21 @@ public class TSellTicket {
                 Objects.equals(unitPrice, that.unitPrice) &&
                 Objects.equals(num, that.num) &&
                 Objects.equals(total, that.total) &&
-                Objects.equals(endTime, that.endTime);
+                Objects.equals(endTime, that.endTime) &&
+                Objects.equals(status, that.status);
     }
 
     @Override
     public int hashCode() {
 
-        return Objects.hash(id, startStation, endStation, unitPrice, num, total, endTime);
+        return Objects.hash(id, startStation, endStation, unitPrice, num, total, endTime, status);
+    }
+
+    public String getTicketId() {
+        return ticketId;
+    }
+
+    public void setTicketId(String ticketId) {
+        this.ticketId = ticketId;
     }
 }

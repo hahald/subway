@@ -220,7 +220,12 @@
                 },success:function (data) {
                     if(data.flag=='yeah'){
                         $("#message").hide()
-                        window.location.href="open?page=main"/*tpa=http://***index.html*/;
+                        if (data.role=="0"){
+                            window.location.href="opt?page=main";
+                        }else{
+                            window.location.href="opt?page=model";
+                        }
+
                     }else{
                         $("#message").text(data.tip)
                         $("#message").show();
